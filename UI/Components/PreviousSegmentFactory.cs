@@ -17,7 +17,7 @@ namespace LiveSplit.UI.Components
 
         public string Description
         {
-            get { return ""; }
+            get { return "Displays how much time was saved or lost on the previous segment in relation to a comparison."; }
         }
 
         public ComponentCategory Category
