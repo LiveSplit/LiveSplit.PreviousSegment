@@ -195,6 +195,21 @@ namespace LiveSplit.UI.Components
 
             Cache.Restart();
             Cache["NameValue"] = InternalComponent.InformationName;
+            if (Cache.HasChanged)
+            {
+                InternalComponent.AlternateNameText.Clear();
+                if (InternalComponent.InformationName == "Previous Segment")
+                {
+                    InternalComponent.AlternateNameText.Add("Previous Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Seg.");
+                }
+                else
+                {
+                    InternalComponent.AlternateNameText.Add("Live Segment");
+                    InternalComponent.AlternateNameText.Add("Live Seg.");
+                }
+            }
             Cache["TimeValue"] = InternalComponent.ValueLabel.Text;
             Cache["TimeColor"] = InternalComponent.ValueLabel.ForeColor.ToArgb();
 
@@ -202,6 +217,10 @@ namespace LiveSplit.UI.Components
             {
                 invalidator.Invalidate(0, 0, width, height);
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }
