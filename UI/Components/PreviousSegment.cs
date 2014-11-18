@@ -161,17 +161,17 @@ namespace LiveSplit.UI.Components
                 TimeSpan? timeChange = null;
                 if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
                 {
-                    if (LiveSplitStateHelper.CheckBestSegment(state, true, state.LayoutSettings.ShowBestSegments, comparison, state.CurrentTimingMethod) != null)
+                    if (LiveSplitStateHelper.CheckLiveDelta(state, true, comparison, state.CurrentTimingMethod) != null)
                         liveSeg = true;
                 }
                 if (liveSeg)
                 {
-                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex, true, false, true, comparison, state.CurrentTimingMethod);
+                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex, true, false, comparison, state.CurrentTimingMethod);
                     InternalComponent.InformationName = "Live Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
                 }
                 else if (state.CurrentSplitIndex > 0)
                 {
-                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex - 1, false, false, true, comparison, state.CurrentTimingMethod);
+                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex - 1, false, false, comparison, state.CurrentTimingMethod);
                 }
                 if (timeChange != null)
                 {
