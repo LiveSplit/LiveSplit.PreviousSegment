@@ -201,7 +201,7 @@ namespace LiveSplit.UI.Components
             if (Cache.HasChanged)
             {
                 InternalComponent.AlternateNameText.Clear();
-                if (InternalComponent.InformationName == "Previous Segment")
+                if (InternalComponent.InformationName.Contains("Previous Segment"))
                 {
                     InternalComponent.AlternateNameText.Add("Previous Segment");
                     InternalComponent.AlternateNameText.Add("Prev. Segment");
