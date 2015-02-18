@@ -18,8 +18,6 @@ namespace LiveSplit.UI.Components
         protected InfoTimeComponent InternalComponent { get; set; }
         public PreviousSegmentSettings Settings { get; set; }
 
-        public GraphicsCache Cache { get; set; }
-
         protected DeltaTimeFormatter Formatter { get; set; }
 
         public float PaddingTop { get { return InternalComponent.PaddingTop; } }
@@ -42,7 +40,6 @@ namespace LiveSplit.UI.Components
             Formatter.Accuracy = Settings.DeltaAccuracy;
             Formatter.DropDecimals = Settings.DropDecimals;
             InternalComponent = new InfoTimeComponent(null, null, Formatter);
-            Cache = new GraphicsCache();
             state.ComparisonRenamed += state_ComparisonRenamed;
         }
 
@@ -149,9 +146,23 @@ namespace LiveSplit.UI.Components
             if (!state.Run.Comparisons.Contains(comparison))
                 comparison = state.CurrentComparison;
             var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
-
             var componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
 
+            if (InternalComponent.InformationName != componentName)
+            {
+                InternalComponent.AlternateNameText.Clear();
+                if (componentName.Contains("Previous Segment"))
+                {
+                    InternalComponent.AlternateNameText.Add("Previous Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Seg.");
+                }
+                else
+                {
+                    InternalComponent.AlternateNameText.Add("Live Segment");
+                    InternalComponent.AlternateNameText.Add("Live Seg.");
+                }
+            }
             InternalComponent.LongestString = componentName;
             InternalComponent.InformationName = componentName;
 
@@ -196,30 +207,7 @@ namespace LiveSplit.UI.Components
                 InternalComponent.ValueLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
             }
 
-            Cache.Restart();
-            Cache["NameValue"] = InternalComponent.InformationName;
-            if (Cache.HasChanged)
-            {
-                InternalComponent.AlternateNameText.Clear();
-                if (InternalComponent.InformationName.Contains("Previous Segment"))
-                {
-                    InternalComponent.AlternateNameText.Add("Previous Segment");
-                    InternalComponent.AlternateNameText.Add("Prev. Segment");
-                    InternalComponent.AlternateNameText.Add("Prev. Seg.");
-                }
-                else
-                {
-                    InternalComponent.AlternateNameText.Add("Live Segment");
-                    InternalComponent.AlternateNameText.Add("Live Seg.");
-                }
-            }
-            Cache["TimeValue"] = InternalComponent.ValueLabel.Text;
-            Cache["TimeColor"] = InternalComponent.ValueLabel.ForeColor.ToArgb();
-
-            if (invalidator != null && Cache.HasChanged)
-            {
-                invalidator.Invalidate(0, 0, width, height);
-            }
+            InternalComponent.Update(invalidator, state, width, height, mode);
         }
 
         public void Dispose()
