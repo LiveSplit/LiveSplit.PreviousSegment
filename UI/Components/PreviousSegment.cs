@@ -177,25 +177,25 @@ namespace LiveSplit.UI.Components
                 }
                 if (liveSeg)
                 {
-                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex, true, false, comparison, state.CurrentTimingMethod);
+                    timeChange = LiveSplitStateHelper.GetLiveSegmentDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod);
                     InternalComponent.InformationName = "Live Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
                 }
                 else if (state.CurrentSplitIndex > 0)
                 {
-                    timeChange = LiveSplitStateHelper.GetPreviousSegment(state, state.CurrentSplitIndex - 1, false, false, comparison, state.CurrentTimingMethod);
+                    timeChange = LiveSplitStateHelper.GetPreviousSegmentDelta(state, state.CurrentSplitIndex - 1, comparison, state.CurrentTimingMethod);
                 }
                 if (timeChange != null)
                 {
                     InternalComponent.TimeValue = timeChange;
                     if (liveSeg)
-                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, 2, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod).Value;
+                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
                     else
-                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, 1, state.CurrentSplitIndex - 1, comparison, state.CurrentTimingMethod).Value;
+                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
                 }
                 else
                 {
                     InternalComponent.TimeValue = null;
-                    var color = LiveSplitStateHelper.GetSplitColor(state, null, 0, state.CurrentSplitIndex - 1, comparison, state.CurrentTimingMethod);
+                    var color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
                     if (color == null)
                         color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
                     InternalComponent.ValueLabel.ForeColor = color.Value;
