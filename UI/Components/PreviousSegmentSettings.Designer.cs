@@ -152,6 +152,7 @@
             this.rdoDeltaSeconds.TabStop = true;
             this.rdoDeltaSeconds.Text = "Seconds";
             this.rdoDeltaSeconds.UseVisualStyleBackColor = true;
+            this.rdoDeltaSeconds.CheckedChanged += new System.EventHandler(rdoDeltaSeconds_CheckedChanged);
             // 
             // rdoDeltaTenths
             // 
@@ -164,6 +165,7 @@
             this.rdoDeltaTenths.TabStop = true;
             this.rdoDeltaTenths.Text = "Tenths";
             this.rdoDeltaTenths.UseVisualStyleBackColor = true;
+            this.rdoDeltaTenths.CheckedChanged += new System.EventHandler(rdoDeltaTenths_CheckedChanged);
             // 
             // rdoDeltaHundredths
             // 
@@ -238,6 +240,7 @@
             this.cmbGradientType.Name = "cmbGradientType";
             this.cmbGradientType.Size = new System.Drawing.Size(240, 21);
             this.cmbGradientType.TabIndex = 2;
+            this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(cmbGradientType_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -280,6 +283,7 @@
             this.chkOverride.TabIndex = 0;
             this.chkOverride.Text = "Override Layout Settings";
             this.chkOverride.UseVisualStyleBackColor = true;
+            this.chkOverride.CheckedChanged += new System.EventHandler(chkOverride_CheckedChanged);
             // 
             // btnTextColor
             // 
@@ -313,6 +317,7 @@
             this.cmbComparison.Name = "cmbComparison";
             this.cmbComparison.Size = new System.Drawing.Size(298, 21);
             this.cmbComparison.TabIndex = 3;
+            this.cmbComparison.SelectedIndexChanged += new System.EventHandler(cmbComparison_SelectedIndexChanged);
             // 
             // label12
             // 
@@ -344,6 +349,7 @@
             this.Name = "PreviousSegmentSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
             this.Size = new System.Drawing.Size(476, 287);
+            this.Load += new System.EventHandler(PreviousSegmentSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox6.ResumeLayout(false);

@@ -54,25 +54,18 @@ namespace LiveSplit.UI.Components
 
             btnTextColor.DataBindings.Add("BackColor", this, "TextColor", false, DataSourceUpdateMode.OnPropertyChanged);
             chkOverride.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
-            cmbGradientType.SelectedIndexChanged += cmbGradientType_SelectedIndexChanged;
             cmbGradientType.DataBindings.Add("SelectedItem", this, "GradientString", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor1.DataBindings.Add("BackColor", this, "BackgroundColor", false, DataSourceUpdateMode.OnPropertyChanged);
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             chkDropDecimals.DataBindings.Add("Checked", this, "DropDecimals", false, DataSourceUpdateMode.OnPropertyChanged);
-            cmbComparison.SelectedIndexChanged += cmbComparison_SelectedIndexChanged;
             cmbComparison.DataBindings.Add("SelectedItem", this, "Comparison", false, DataSourceUpdateMode.OnPropertyChanged);
-
-            rdoDeltaSeconds.CheckedChanged += rdoDeltaSeconds_CheckedChanged;
-            rdoDeltaTenths.CheckedChanged += rdoDeltaTenths_CheckedChanged;
-            this.Load += PreviousSegmentSettings_Load;
-
-            chkOverride.CheckedChanged += chkOverride_CheckedChanged;
         }
 
         void chkOverride_CheckedChanged(object sender, EventArgs e)
         {
             label1.Enabled = btnTextColor.Enabled = chkOverride.Checked;
         }
+
         void cmbComparison_SelectedIndexChanged(object sender, EventArgs e)
         {
             Comparison = cmbComparison.SelectedItem.ToString();
