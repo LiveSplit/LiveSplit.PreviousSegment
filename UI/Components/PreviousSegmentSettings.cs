@@ -32,6 +32,8 @@ namespace LiveSplit.UI.Components
         public TimeAccuracy DeltaAccuracy { get; set; }
         public bool DropDecimals { get; set; }
         public bool Display2Rows { get; set; }
+        public bool ShowPossibleTimeSave { get; set; }
+        public TimeAccuracy TimeSaveAccuracy { get; set; }
 
         public String Comparison { get; set; }
         public LiveSplitState CurrentState { get; set; }
@@ -48,9 +50,11 @@ namespace LiveSplit.UI.Components
             BackgroundColor2 = Color.Transparent;
             BackgroundGradient = GradientType.Plain;
             DeltaAccuracy = TimeAccuracy.Tenths;
+            TimeSaveAccuracy = TimeAccuracy.Tenths;
             DropDecimals = true;
             Comparison = "Current Comparison";
             Display2Rows = false;
+            ShowPossibleTimeSave = false;
 
             btnTextColor.DataBindings.Add("BackColor", this, "TextColor", false, DataSourceUpdateMode.OnPropertyChanged);
             chkOverride.DataBindings.Add("Checked", this, "OverrideTextColor", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -59,6 +63,7 @@ namespace LiveSplit.UI.Components
             btnColor2.DataBindings.Add("BackColor", this, "BackgroundColor2", false, DataSourceUpdateMode.OnPropertyChanged);
             chkDropDecimals.DataBindings.Add("Checked", this, "DropDecimals", false, DataSourceUpdateMode.OnPropertyChanged);
             cmbComparison.DataBindings.Add("SelectedItem", this, "Comparison", false, DataSourceUpdateMode.OnPropertyChanged);
+            chkPossibleTimeSave.DataBindings.Add("Checked", this, "ShowPossibleTimeSave", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         void chkOverride_CheckedChanged(object sender, EventArgs e)
@@ -73,17 +78,18 @@ namespace LiveSplit.UI.Components
 
         void rdoDeltaTenths_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateAccuracy();
+            UpdateDeltaAccuracy();
         }
 
         void rdoDeltaSeconds_CheckedChanged(object sender, EventArgs e)
         {
-            UpdateAccuracy();
+            UpdateDeltaAccuracy();
         }
 
         void PreviousSegmentSettings_Load(object sender, EventArgs e)
         {
             chkOverride_CheckedChanged(null, null);
+            chkPossibleTimeSave_CheckedChanged(null, null);
             cmbComparison.Items.Clear();
             cmbComparison.Items.Add("Current Comparison");
             cmbComparison.Items.AddRange(CurrentState.Run.Comparisons.Where(x => x != BestSplitTimesComparisonGenerator.ComparisonName && x != NoneComparisonGenerator.ComparisonName).ToArray());
@@ -92,6 +98,9 @@ namespace LiveSplit.UI.Components
             rdoDeltaHundredths.Checked = DeltaAccuracy == TimeAccuracy.Hundredths;
             rdoDeltaTenths.Checked = DeltaAccuracy == TimeAccuracy.Tenths;
             rdoDeltaSeconds.Checked = DeltaAccuracy == TimeAccuracy.Seconds;
+            rdoTimeSaveHundredths.Checked = TimeSaveAccuracy == TimeAccuracy.Hundredths;
+            rdoTimeSaveTenths.Checked = TimeSaveAccuracy == TimeAccuracy.Tenths;
+            rdoTimeSaveSeconds.Checked = TimeSaveAccuracy == TimeAccuracy.Seconds;
             if (Mode == LayoutMode.Horizontal)
             {
                 chkTwoRows.Enabled = false;
@@ -106,7 +115,7 @@ namespace LiveSplit.UI.Components
             }
         }
 
-        void UpdateAccuracy()
+        void UpdateDeltaAccuracy()
         {
             if (rdoDeltaSeconds.Checked)
                 DeltaAccuracy = TimeAccuracy.Seconds;
@@ -114,6 +123,16 @@ namespace LiveSplit.UI.Components
                 DeltaAccuracy = TimeAccuracy.Tenths;
             else
                 DeltaAccuracy = TimeAccuracy.Hundredths;
+        }
+
+        void UpdateTimeSaveAccuracy()
+        {
+            if (rdoTimeSaveSeconds.Checked)
+                TimeSaveAccuracy = TimeAccuracy.Seconds;
+            else if (rdoTimeSaveTenths.Checked)
+                TimeSaveAccuracy = TimeAccuracy.Tenths;
+            else
+                TimeSaveAccuracy = TimeAccuracy.Hundredths;
         }
 
         void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
@@ -136,12 +155,14 @@ namespace LiveSplit.UI.Components
             DropDecimals = SettingsHelper.ParseBool(element["DropDecimals"]);
             Comparison = SettingsHelper.ParseString(element["Comparison"]);
             Display2Rows = SettingsHelper.ParseBool(element["Display2Rows"], false);
+            ShowPossibleTimeSave = SettingsHelper.ParseBool(element["ShowPossibleTimeSave"], false);
+            TimeSaveAccuracy = SettingsHelper.ParseEnum<TimeAccuracy>(element["TimeSaveAccuracy"], TimeAccuracy.Tenths);
         }
 
         public XmlNode GetSettings(XmlDocument document)
         {
             var parent = document.CreateElement("Settings");
-            parent.AppendChild(SettingsHelper.ToElement(document, "Version", "1.4"));
+            parent.AppendChild(SettingsHelper.ToElement(document, "Version", "1.6"));
             parent.AppendChild(SettingsHelper.ToElement(document, TextColor, "TextColor"));
             parent.AppendChild(SettingsHelper.ToElement(document, "OverrideTextColor", OverrideTextColor));
             parent.AppendChild(SettingsHelper.ToElement(document, BackgroundColor, "BackgroundColor"));
@@ -151,12 +172,29 @@ namespace LiveSplit.UI.Components
             parent.AppendChild(SettingsHelper.ToElement(document, "DropDecimals", DropDecimals));
             parent.AppendChild(SettingsHelper.ToElement(document, "Comparison", Comparison));
             parent.AppendChild(SettingsHelper.ToElement(document, "Display2Rows", Display2Rows));
+            parent.AppendChild(SettingsHelper.ToElement(document, "ShowPossibleTimeSave", ShowPossibleTimeSave));
+            parent.AppendChild(SettingsHelper.ToElement(document, "TimeSaveAccuracy", TimeSaveAccuracy));
             return parent;
         }
 
         private void ColorButtonClick(object sender, EventArgs e)
         {
             SettingsHelper.ColorButtonClick((Button)sender, this);
+        }
+
+        private void rdoTimeSaveSeconds_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTimeSaveAccuracy();
+        }
+
+        private void rdoTimeSaveHundredths_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTimeSaveAccuracy();
+        }
+
+        private void chkPossibleTimeSave_CheckedChanged(object sender, EventArgs e)
+        {
+            rdoTimeSaveSeconds.Enabled = rdoTimeSaveTenths.Enabled = rdoTimeSaveHundredths.Enabled = boxTimeSaveAccuracy.Enabled = chkPossibleTimeSave.Checked;
         }
     }
 }

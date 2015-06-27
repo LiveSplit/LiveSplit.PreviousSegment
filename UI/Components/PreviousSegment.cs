@@ -18,7 +18,8 @@ namespace LiveSplit.UI.Components
         protected InfoTimeComponent InternalComponent { get; set; }
         public PreviousSegmentSettings Settings { get; set; }
 
-        protected DeltaTimeFormatter Formatter { get; set; }
+        protected DeltaTimeFormatter DeltaFormatter { get; set; }
+        protected PossibleTimeSaveFormatter TimeSaveFormatter { get; set; }
 
         public float PaddingTop { get { return InternalComponent.PaddingTop; } }
         public float PaddingLeft { get { return InternalComponent.PaddingLeft; } }
@@ -32,14 +33,13 @@ namespace LiveSplit.UI.Components
 
         public PreviousSegment(LiveSplitState state)
         {
-            Formatter = new DeltaTimeFormatter();
+            DeltaFormatter = new DeltaTimeFormatter();
+            TimeSaveFormatter = new PossibleTimeSaveFormatter();
             Settings = new PreviousSegmentSettings()
             {
                 CurrentState = state
             };
-            Formatter.Accuracy = Settings.DeltaAccuracy;
-            Formatter.DropDecimals = Settings.DropDecimals;
-            InternalComponent = new InfoTimeComponent(null, null, Formatter);
+            InternalComponent = new InfoTimeComponent(null, null, DeltaFormatter);
             state.ComparisonRenamed += state_ComparisonRenamed;
         }
 
@@ -56,10 +56,6 @@ namespace LiveSplit.UI.Components
         private void PrepareDraw(LiveSplitState state)
         {
             InternalComponent.DisplayTwoRows = Settings.Display2Rows;
-
-            Formatter.Accuracy = Settings.DeltaAccuracy;
-            Formatter.DropDecimals = Settings.DropDecimals;
-
             InternalComponent.NameLabel.HasShadow
                 = InternalComponent.ValueLabel.HasShadow
                 = state.LayoutSettings.DropShadows;
@@ -140,6 +136,34 @@ namespace LiveSplit.UI.Components
             return Settings.GetSettings(document);
         }
 
+        public TimeSpan? GetPossibleTimeSave(LiveSplitState state, int splitIndex, string comparison)
+        {
+            var prevTime = TimeSpan.Zero;
+            TimeSpan? bestSegments = state.Run[splitIndex].BestSegmentTime[state.CurrentTimingMethod];
+
+            while (splitIndex > 0 && bestSegments != null)
+            {
+                var splitTime = state.Run[splitIndex - 1].Comparisons[comparison][state.CurrentTimingMethod];
+                if (splitTime != null)
+                {
+                    prevTime = splitTime.Value;
+                    break;
+                }
+                else
+                {
+                    splitIndex--;
+                    bestSegments += state.Run[splitIndex].BestSegmentTime[state.CurrentTimingMethod];
+                }
+            }
+
+            var time = state.Run[splitIndex].Comparisons[comparison][state.CurrentTimingMethod] - prevTime - bestSegments;
+
+            if (time < TimeSpan.Zero)
+                time = TimeSpan.Zero;
+
+            return time;
+        }
+
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
             var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
@@ -166,10 +190,15 @@ namespace LiveSplit.UI.Components
             InternalComponent.LongestString = componentName;
             InternalComponent.InformationName = componentName;
 
+            DeltaFormatter.Accuracy = Settings.DeltaAccuracy;
+            DeltaFormatter.DropDecimals = Settings.DropDecimals;
+            TimeSaveFormatter.Accuracy = Settings.TimeSaveAccuracy;
+
+            TimeSpan? timeChange = null;
+            TimeSpan? timeSave = null;
             if (state.CurrentPhase != TimerPhase.NotRunning)
             {
                 bool liveSeg = false;
-                TimeSpan? timeChange = null;
                 if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
                 {
                     if (LiveSplitStateHelper.CheckLiveDelta(state, true, comparison, state.CurrentTimingMethod) != null)
@@ -178,15 +207,16 @@ namespace LiveSplit.UI.Components
                 if (liveSeg)
                 {
                     timeChange = LiveSplitStateHelper.GetLiveSegmentDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod);
+                    timeSave = GetPossibleTimeSave(state, state.CurrentSplitIndex, comparison);
                     InternalComponent.InformationName = "Live Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
                 }
                 else if (state.CurrentSplitIndex > 0)
                 {
                     timeChange = LiveSplitStateHelper.GetPreviousSegmentDelta(state, state.CurrentSplitIndex - 1, comparison, state.CurrentTimingMethod);
+                    timeSave = GetPossibleTimeSave(state, state.CurrentSplitIndex - 1, comparison);
                 }
                 if (timeChange != null)
                 {
-                    InternalComponent.TimeValue = timeChange;
                     if (liveSeg)
                         InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
                     else
@@ -194,7 +224,6 @@ namespace LiveSplit.UI.Components
                 }
                 else
                 {
-                    InternalComponent.TimeValue = null;
                     var color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
                     if (color == null)
                         color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
@@ -203,9 +232,10 @@ namespace LiveSplit.UI.Components
             }
             else
             {
-                InternalComponent.TimeValue = null;
                 InternalComponent.ValueLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
             }
+            InternalComponent.InformationValue = DeltaFormatter.Format(timeChange) 
+                + (Settings.ShowPossibleTimeSave ? " / " + TimeSaveFormatter.Format(timeSave) : "");
 
             InternalComponent.Update(invalidator, state, width, height, mode);
         }

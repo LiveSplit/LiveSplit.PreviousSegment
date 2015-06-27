@@ -49,6 +49,14 @@
             this.cmbComparison = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.chkTwoRows = new System.Windows.Forms.CheckBox();
+            this.chkPossibleTimeSave = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.boxTimeSaveAccuracy = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.rdoTimeSaveSeconds = new System.Windows.Forms.RadioButton();
+            this.rdoTimeSaveTenths = new System.Windows.Forms.RadioButton();
+            this.rdoTimeSaveHundredths = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -56,6 +64,10 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.boxTimeSaveAccuracy.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -74,16 +86,18 @@
             this.tableLayoutPanel1.Controls.Add(this.cmbComparison, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label12, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.chkTwoRows, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(7, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(462, 273);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(462, 374);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupBox6
@@ -93,7 +107,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox6.Location = new System.Drawing.Point(3, 173);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(456, 97);
+            this.groupBox6.Size = new System.Drawing.Size(456, 96);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Delta Accuracy";
@@ -110,7 +124,7 @@
             this.tableLayoutPanel7.RowCount = 2;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(450, 78);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(450, 77);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // groupBox7
@@ -119,7 +133,7 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(3, 32);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(444, 43);
+            this.groupBox7.Size = new System.Drawing.Size(444, 42);
             this.groupBox7.TabIndex = 1;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Accuracy";
@@ -138,7 +152,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(438, 24);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(438, 23);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // rdoDeltaSeconds
@@ -152,7 +166,7 @@
             this.rdoDeltaSeconds.TabStop = true;
             this.rdoDeltaSeconds.Text = "Seconds";
             this.rdoDeltaSeconds.UseVisualStyleBackColor = true;
-            this.rdoDeltaSeconds.CheckedChanged += new System.EventHandler(rdoDeltaSeconds_CheckedChanged);
+            this.rdoDeltaSeconds.CheckedChanged += new System.EventHandler(this.rdoDeltaSeconds_CheckedChanged);
             // 
             // rdoDeltaTenths
             // 
@@ -165,7 +179,7 @@
             this.rdoDeltaTenths.TabStop = true;
             this.rdoDeltaTenths.Text = "Tenths";
             this.rdoDeltaTenths.UseVisualStyleBackColor = true;
-            this.rdoDeltaTenths.CheckedChanged += new System.EventHandler(rdoDeltaTenths_CheckedChanged);
+            this.rdoDeltaTenths.CheckedChanged += new System.EventHandler(this.rdoDeltaTenths_CheckedChanged);
             // 
             // rdoDeltaHundredths
             // 
@@ -240,7 +254,7 @@
             this.cmbGradientType.Name = "cmbGradientType";
             this.cmbGradientType.Size = new System.Drawing.Size(240, 21);
             this.cmbGradientType.TabIndex = 2;
-            this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(cmbGradientType_SelectedIndexChanged);
+            this.cmbGradientType.SelectedIndexChanged += new System.EventHandler(this.cmbGradientType_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -283,7 +297,7 @@
             this.chkOverride.TabIndex = 0;
             this.chkOverride.Text = "Override Layout Settings";
             this.chkOverride.UseVisualStyleBackColor = true;
-            this.chkOverride.CheckedChanged += new System.EventHandler(chkOverride_CheckedChanged);
+            this.chkOverride.CheckedChanged += new System.EventHandler(this.chkOverride_CheckedChanged);
             // 
             // btnTextColor
             // 
@@ -317,7 +331,7 @@
             this.cmbComparison.Name = "cmbComparison";
             this.cmbComparison.Size = new System.Drawing.Size(298, 21);
             this.cmbComparison.TabIndex = 3;
-            this.cmbComparison.SelectedIndexChanged += new System.EventHandler(cmbComparison_SelectedIndexChanged);
+            this.cmbComparison.SelectedIndexChanged += new System.EventHandler(this.cmbComparison_SelectedIndexChanged);
             // 
             // label12
             // 
@@ -341,6 +355,114 @@
             this.chkTwoRows.Text = "Display 2 Rows";
             this.chkTwoRows.UseVisualStyleBackColor = true;
             // 
+            // chkPossibleTimeSave
+            // 
+            this.chkPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkPossibleTimeSave.AutoSize = true;
+            this.chkPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
+            this.chkPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkPossibleTimeSave.Name = "chkPossibleTimeSave";
+            this.chkPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
+            this.chkPossibleTimeSave.TabIndex = 42;
+            this.chkPossibleTimeSave.Text = "Show Possible Time Save";
+            this.chkPossibleTimeSave.UseVisualStyleBackColor = true;
+            this.chkPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 4);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel3);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 275);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(456, 96);
+            this.groupBox2.TabIndex = 43;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Possible Time Save";
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.boxTimeSaveAccuracy, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.chkPossibleTimeSave, 0, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 2;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(450, 77);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // boxTimeSaveAccuracy
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.boxTimeSaveAccuracy, 2);
+            this.boxTimeSaveAccuracy.Controls.Add(this.tableLayoutPanel4);
+            this.boxTimeSaveAccuracy.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.boxTimeSaveAccuracy.Location = new System.Drawing.Point(3, 32);
+            this.boxTimeSaveAccuracy.Name = "boxTimeSaveAccuracy";
+            this.boxTimeSaveAccuracy.Size = new System.Drawing.Size(444, 42);
+            this.boxTimeSaveAccuracy.TabIndex = 2;
+            this.boxTimeSaveAccuracy.TabStop = false;
+            this.boxTimeSaveAccuracy.Text = "Accuracy";
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveSeconds, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveTenths, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveHundredths, 2, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(438, 23);
+            this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // rdoTimeSaveSeconds
+            // 
+            this.rdoTimeSaveSeconds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoTimeSaveSeconds.AutoSize = true;
+            this.rdoTimeSaveSeconds.Location = new System.Drawing.Point(3, 3);
+            this.rdoTimeSaveSeconds.Name = "rdoTimeSaveSeconds";
+            this.rdoTimeSaveSeconds.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveSeconds.TabIndex = 0;
+            this.rdoTimeSaveSeconds.TabStop = true;
+            this.rdoTimeSaveSeconds.Text = "Seconds";
+            this.rdoTimeSaveSeconds.UseVisualStyleBackColor = true;
+            this.rdoTimeSaveSeconds.CheckedChanged += new System.EventHandler(this.rdoTimeSaveSeconds_CheckedChanged);
+            // 
+            // rdoTimeSaveTenths
+            // 
+            this.rdoTimeSaveTenths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoTimeSaveTenths.AutoSize = true;
+            this.rdoTimeSaveTenths.Location = new System.Drawing.Point(149, 3);
+            this.rdoTimeSaveTenths.Name = "rdoTimeSaveTenths";
+            this.rdoTimeSaveTenths.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveTenths.TabIndex = 1;
+            this.rdoTimeSaveTenths.TabStop = true;
+            this.rdoTimeSaveTenths.Text = "Tenths";
+            this.rdoTimeSaveTenths.UseVisualStyleBackColor = true;
+            // 
+            // rdoTimeSaveHundredths
+            // 
+            this.rdoTimeSaveHundredths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoTimeSaveHundredths.AutoSize = true;
+            this.rdoTimeSaveHundredths.Location = new System.Drawing.Point(295, 3);
+            this.rdoTimeSaveHundredths.Name = "rdoTimeSaveHundredths";
+            this.rdoTimeSaveHundredths.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveHundredths.TabIndex = 2;
+            this.rdoTimeSaveHundredths.TabStop = true;
+            this.rdoTimeSaveHundredths.Text = "Hundredths";
+            this.rdoTimeSaveHundredths.UseVisualStyleBackColor = true;
+            this.rdoTimeSaveHundredths.CheckedChanged += new System.EventHandler(this.rdoTimeSaveHundredths_CheckedChanged);
+            // 
             // PreviousSegmentSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -348,8 +470,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "PreviousSegmentSettings";
             this.Padding = new System.Windows.Forms.Padding(7);
-            this.Size = new System.Drawing.Size(476, 287);
-            this.Load += new System.EventHandler(PreviousSegmentSettings_Load);
+            this.Size = new System.Drawing.Size(476, 388);
+            this.Load += new System.EventHandler(this.PreviousSegmentSettings_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -361,6 +483,12 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.boxTimeSaveAccuracy.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -388,5 +516,13 @@
         private System.Windows.Forms.ComboBox cmbComparison;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chkTwoRows;
+        private System.Windows.Forms.CheckBox chkPossibleTimeSave;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.GroupBox boxTimeSaveAccuracy;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.RadioButton rdoTimeSaveSeconds;
+        private System.Windows.Forms.RadioButton rdoTimeSaveTenths;
+        private System.Windows.Forms.RadioButton rdoTimeSaveHundredths;
     }
 }
