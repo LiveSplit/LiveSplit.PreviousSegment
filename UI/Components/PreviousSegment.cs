@@ -201,7 +201,7 @@ namespace LiveSplit.UI.Components
                 bool liveSeg = false;
                 if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
                 {
-                    if (LiveSplitStateHelper.CheckLiveDelta(state, true, comparison, state.CurrentTimingMethod) != null)
+                    if (LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod) != null)
                         liveSeg = true;
                 }
                 if (liveSeg)
