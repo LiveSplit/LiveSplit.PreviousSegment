@@ -83,6 +83,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\Components\PreviousSegmentSettings.ja-JP.resx">
+      <DependentUpon>PreviousSegmentSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Components\PreviousSegmentSettings.resx">
       <DependentUpon>PreviousSegmentSettings.cs</DependentUpon>
     </EmbeddedResource>
