@@ -23,6 +23,8 @@ namespace LiveSplit.UI.Components
         public float PaddingBottom { get { return InternalComponent.PaddingBottom; } }
         public float PaddingRight { get { return InternalComponent.PaddingRight; } }
 
+        private string previousNameText { get; set; }
+
         public IDictionary<string, Action> ContextMenuControls
         {
             get { return null; }
@@ -169,21 +171,6 @@ namespace LiveSplit.UI.Components
             var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
             var componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
 
-            if (InternalComponent.InformationName != componentName)
-            {
-                InternalComponent.AlternateNameText.Clear();
-                if (componentName.Contains("Previous Segment"))
-                {
-                    InternalComponent.AlternateNameText.Add("Previous Segment");
-                    InternalComponent.AlternateNameText.Add("Prev. Segment");
-                    InternalComponent.AlternateNameText.Add("Prev. Seg.");
-                }
-                else
-                {
-                    InternalComponent.AlternateNameText.Add("Live Segment");
-                    InternalComponent.AlternateNameText.Add("Live Seg.");
-                }
-            }
             InternalComponent.LongestString = componentName;
             InternalComponent.InformationName = componentName;
 
@@ -193,9 +180,9 @@ namespace LiveSplit.UI.Components
 
             TimeSpan? timeChange = null;
             TimeSpan? timeSave = null;
+            bool liveSeg = false;
             if (state.CurrentPhase != TimerPhase.NotRunning)
             {
-                bool liveSeg = false;
                 if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
                 {
                     if (LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod) != null)
@@ -231,6 +218,24 @@ namespace LiveSplit.UI.Components
             {
                 InternalComponent.ValueLabel.ForeColor = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
             }
+
+            if (InternalComponent.InformationName != previousNameText)
+            {
+                InternalComponent.AlternateNameText.Clear();
+                if (liveSeg)
+                {
+                    InternalComponent.AlternateNameText.Add("Live Segment");
+                    InternalComponent.AlternateNameText.Add("Live Seg.");
+                }
+                else
+                {
+                    InternalComponent.AlternateNameText.Add("Previous Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Segment");
+                    InternalComponent.AlternateNameText.Add("Prev. Seg.");
+                }
+                previousNameText = InternalComponent.InformationName;
+            }
+
             InternalComponent.InformationValue = DeltaFormatter.Format(timeChange) 
                 + (Settings.ShowPossibleTimeSave ? " / " + TimeSaveFormatter.Format(timeSave) : "");
 
