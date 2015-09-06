@@ -16,7 +16,7 @@ namespace LiveSplit.UI.Components
         public Color BackgroundColor { get; set; }
         public Color BackgroundColor2 { get; set; }
         public GradientType BackgroundGradient { get; set; }
-        public String GradientString
+        public string GradientString
         {
             get { return BackgroundGradient.ToString(); }
             set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
@@ -28,7 +28,7 @@ namespace LiveSplit.UI.Components
         public bool ShowPossibleTimeSave { get; set; }
         public TimeAccuracy TimeSaveAccuracy { get; set; }
 
-        public String Comparison { get; set; }
+        public string Comparison { get; set; }
         public LiveSplitState CurrentState { get; set; }
 
         public LayoutMode Mode { get; set; }

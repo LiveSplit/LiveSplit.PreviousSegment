@@ -5,52 +5,20 @@ namespace LiveSplit.UI.Components
 {
     public class PreviousSegmentFactory : IComponentFactory
     {
-        public string ComponentName
-        {
-            get { return "Previous Segment"; }
-        }
+        public string ComponentName => "Previous Segment";
 
-        public string Description
-        {
-            get { return "Displays how much time was saved or lost on the previous segment in relation to a comparison."; }
-        }
+        public string Description => "Displays how much time was saved or lost on the previous segment in relation to a comparison.";
 
-        public ComponentCategory Category
-        {
-            get { return ComponentCategory.Information; }
-        }
+        public ComponentCategory Category => ComponentCategory.Information; 
 
-        public IComponent Create(LiveSplitState state)
-        {
-            return new PreviousSegment(state);
-        }
+        public IComponent Create(LiveSplitState state) => new PreviousSegment(state);
 
-        public string UpdateName
-        {
-            get { return ComponentName; }
-        }
+        public string UpdateName => ComponentName;
 
-        public string XMLURL
-        {
-#if RELEASE_CANDIDATE
-            get { return "http://livesplit.org/update_rc_sdhjdop/Components/update.LiveSplit.PreviousSegment.xml"; }
-#else
-            get { return "http://livesplit.org/update/Components/update.LiveSplit.PreviousSegment.xml"; }
-#endif
-        }
+        public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.PreviousSegment.xml";
 
-        public string UpdateURL
-        {
-#if RELEASE_CANDIDATE
-            get { return "http://livesplit.org/update_rc_sdhjdop/"; }
-#else
-            get { return "http://livesplit.org/update/"; }
-#endif
-        }
+        public string UpdateURL => "http://livesplit.org/update/";
 
-        public Version Version
-        {
-            get { return Version.Parse("1.6"); }
-        }
+        public Version Version => Version.Parse("1.6");
     }
 }
