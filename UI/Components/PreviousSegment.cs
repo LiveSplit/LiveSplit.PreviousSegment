@@ -165,17 +165,12 @@ namespace LiveSplit.UI.Components
 
             TimeSpan? timeChange = null;
             TimeSpan? timeSave = null;
-            bool liveSeg = false;
+            var liveSegment = LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod);
             if (state.CurrentPhase != TimerPhase.NotRunning)
             {
-                if (state.CurrentPhase == TimerPhase.Running || state.CurrentPhase == TimerPhase.Paused)
+                if (liveSegment != null)
                 {
-                    if (LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod) != null)
-                        liveSeg = true;
-                }
-                if (liveSeg)
-                {
-                    timeChange = LiveSplitStateHelper.GetLiveSegmentDelta(state, state.CurrentSplitIndex, comparison, state.CurrentTimingMethod);
+                    timeChange = liveSegment;
                     timeSave = GetPossibleTimeSave(state, state.CurrentSplitIndex, comparison);
                     InternalComponent.InformationName = "Live Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
                 }
@@ -186,7 +181,7 @@ namespace LiveSplit.UI.Components
                 }
                 if (timeChange != null)
                 {
-                    if (liveSeg)
+                    if (liveSegment != null)
                         InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
                     else
                         InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
@@ -207,7 +202,7 @@ namespace LiveSplit.UI.Components
             if (InternalComponent.InformationName != previousNameText)
             {
                 InternalComponent.AlternateNameText.Clear();
-                if (liveSeg)
+                if (liveSegment != null)
                 {
                     InternalComponent.AlternateNameText.Add("Live Segment");
                     InternalComponent.AlternateNameText.Add("Live Seg.");
