@@ -165,7 +165,7 @@ namespace LiveSplit.UI.Components
 
             TimeSpan? timeChange = null;
             TimeSpan? timeSave = null;
-            var liveSegment = LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod);
+            var liveSegment = LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod, false);
             if (state.CurrentPhase != TimerPhase.NotRunning)
             {
                 if (liveSegment != null)
