@@ -202,6 +202,7 @@ namespace LiveSplit.UI.Components
 
         private void chkPossibleTimeSave_CheckedChanged(object sender, EventArgs e)
         {
+            this.chkDropDecimalsPossibleTimeSave.Enabled = chkPossibleTimeSave.Checked;
             rdoTimeSaveSeconds.Enabled = rdoTimeSaveTenths.Enabled = rdoTimeSaveHundredths.Enabled = boxTimeSaveAccuracy.Enabled = chkPossibleTimeSave.Checked;
         }
     }
