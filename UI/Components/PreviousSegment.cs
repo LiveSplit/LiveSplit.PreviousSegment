@@ -162,7 +162,7 @@ namespace LiveSplit.UI.Components
             DeltaFormatter.Accuracy = Settings.DeltaAccuracy;
             DeltaFormatter.DropDecimals = Settings.DropDecimals;
             TimeSaveFormatter.Accuracy = Settings.TimeSaveAccuracy;
-            TimeSaveFormatter.DropDecimals = Settings.DropDecimalsPossibleTimeSave;
+            TimeSaveFormatter.DropDecimalsPossibleTimeSave = Settings.DropDecimalsPossibleTimeSave;
 
             TimeSpan? timeChange = null;
             TimeSpan? timeSave = null;
