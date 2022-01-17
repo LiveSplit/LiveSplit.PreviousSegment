@@ -49,7 +49,6 @@
             this.cmbComparison = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.chkTwoRows = new System.Windows.Forms.CheckBox();
-            this.chkPossibleTimeSave = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.boxTimeSaveAccuracy = new System.Windows.Forms.GroupBox();
@@ -57,6 +56,8 @@
             this.rdoTimeSaveSeconds = new System.Windows.Forms.RadioButton();
             this.rdoTimeSaveTenths = new System.Windows.Forms.RadioButton();
             this.rdoTimeSaveHundredths = new System.Windows.Forms.RadioButton();
+            this.chkPossibleTimeSave = new System.Windows.Forms.CheckBox();
+            this.chkDropDecimalsPossibleTimeSave = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -355,19 +356,6 @@
             this.chkTwoRows.Text = "Display 2 Rows";
             this.chkTwoRows.UseVisualStyleBackColor = true;
             // 
-            // chkPossibleTimeSave
-            // 
-            this.chkPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkPossibleTimeSave.AutoSize = true;
-            this.chkPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
-            this.chkPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.chkPossibleTimeSave.Name = "chkPossibleTimeSave";
-            this.chkPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
-            this.chkPossibleTimeSave.TabIndex = 42;
-            this.chkPossibleTimeSave.Text = "Show Possible Time Save";
-            this.chkPossibleTimeSave.UseVisualStyleBackColor = true;
-            this.chkPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
-            // 
             // groupBox2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 4);
@@ -383,10 +371,11 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel3.Controls.Add(this.boxTimeSaveAccuracy, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.chkPossibleTimeSave, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.chkDropDecimalsPossibleTimeSave, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -463,6 +452,32 @@
             this.rdoTimeSaveHundredths.UseVisualStyleBackColor = true;
             this.rdoTimeSaveHundredths.CheckedChanged += new System.EventHandler(this.rdoTimeSaveHundredths_CheckedChanged);
             // 
+            // chkPossibleTimeSave
+            // 
+            this.chkPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkPossibleTimeSave.AutoSize = true;
+            this.chkPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
+            this.chkPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkPossibleTimeSave.Name = "chkPossibleTimeSave";
+            this.chkPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
+            this.chkPossibleTimeSave.TabIndex = 42;
+            this.chkPossibleTimeSave.Text = "Show Possible Time Save";
+            this.chkPossibleTimeSave.UseVisualStyleBackColor = true;
+            this.chkPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
+            // 
+            // chkDropDecimalsPossibleTimeSave
+            // 
+            this.chkDropDecimalsPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDropDecimalsPossibleTimeSave.AutoSize = true;
+            this.chkDropDecimalsPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
+            this.chkDropDecimalsPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkDropDecimalsPossibleTimeSave.Name = "chkDropDecimalsPossibleTimeSave";
+            this.chkDropDecimalsPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
+            this.chkDropDecimalsPossibleTimeSave.TabIndex = 42;
+            this.chkDropDecimalsPossibleTimeSave.Text = "Drop Decimals When More Than 1 Minute";
+            this.chkDropDecimalsPossibleTimeSave.UseVisualStyleBackColor = true;
+            this.chkDropDecimalsPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
+            // 
             // PreviousSegmentSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,6 +532,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox chkTwoRows;
         private System.Windows.Forms.CheckBox chkPossibleTimeSave;
+        private System.Windows.Forms.CheckBox chkDropDecimalsPossibleTimeSave;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.GroupBox boxTimeSaveAccuracy;
