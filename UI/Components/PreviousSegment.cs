@@ -182,9 +182,23 @@ namespace LiveSplit.UI.Components
                 if (timeChange != null)
                 {
                     if (liveSegment != null)
-                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
+                    {
+                        var color = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod);
+                        if (color == null)
+                        {
+                            color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
+                        }
+                        InternalComponent.ValueLabel.ForeColor = color.Value;
+                    }
                     else
-                        InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
+                    {
+                        var color = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod);
+                        if (color == null)
+                        {
+                            color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
+                        }
+                        InternalComponent.ValueLabel.ForeColor = color.Value;
+                    }
                 }
                 else
                 {
