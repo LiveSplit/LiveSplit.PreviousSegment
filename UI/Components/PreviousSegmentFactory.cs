@@ -1,5 +1,8 @@
 ﻿using LiveSplit.Model;
+using LiveSplit.UI.Components;
 using System;
+
+[assembly: ComponentFactory(typeof(PreviousSegmentFactory))]
 
 namespace LiveSplit.UI.Components
 {
@@ -9,7 +12,7 @@ namespace LiveSplit.UI.Components
 
         public string Description => "Displays how much time was saved or lost on the previous segment in relation to a comparison.";
 
-        public ComponentCategory Category => ComponentCategory.Information; 
+        public ComponentCategory Category => ComponentCategory.Information;
 
         public IComponent Create(LiveSplitState state) => new PreviousSegment(state);
 
