@@ -122,7 +122,7 @@ namespace LiveSplit.UI.Components
             else if (rdoDeltaHundredths.Checked)
                 DeltaAccuracy = TimeAccuracy.Hundredths;
             else
-                DeltaAccuracy = TimeAccuracy.Seconds;
+                DeltaAccuracy = TimeAccuracy.Milliseconds;
         }
 
         void UpdateTimeSaveAccuracy()
