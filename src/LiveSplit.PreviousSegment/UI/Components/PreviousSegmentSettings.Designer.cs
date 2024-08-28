@@ -49,7 +49,6 @@
             this.cmbComparison = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.chkTwoRows = new System.Windows.Forms.CheckBox();
-            this.chkPossibleTimeSave = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.boxTimeSaveAccuracy = new System.Windows.Forms.GroupBox();
@@ -57,6 +56,9 @@
             this.rdoTimeSaveSeconds = new System.Windows.Forms.RadioButton();
             this.rdoTimeSaveTenths = new System.Windows.Forms.RadioButton();
             this.rdoTimeSaveHundredths = new System.Windows.Forms.RadioButton();
+            this.chkPossibleTimeSave = new System.Windows.Forms.CheckBox();
+            this.rdoDeltaMilliseconds = new System.Windows.Forms.RadioButton();
+            this.rdoMilliseconds = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
@@ -140,10 +142,12 @@
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 3;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel8.ColumnCount = 4;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel8.Controls.Add(this.rdoDeltaMilliseconds, 3, 0);
             this.tableLayoutPanel8.Controls.Add(this.rdoDeltaSeconds, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.rdoDeltaTenths, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.rdoDeltaHundredths, 2, 0);
@@ -161,7 +165,7 @@
             this.rdoDeltaSeconds.AutoSize = true;
             this.rdoDeltaSeconds.Location = new System.Drawing.Point(3, 3);
             this.rdoDeltaSeconds.Name = "rdoDeltaSeconds";
-            this.rdoDeltaSeconds.Size = new System.Drawing.Size(140, 17);
+            this.rdoDeltaSeconds.Size = new System.Drawing.Size(103, 17);
             this.rdoDeltaSeconds.TabIndex = 0;
             this.rdoDeltaSeconds.TabStop = true;
             this.rdoDeltaSeconds.Text = "Seconds";
@@ -172,9 +176,9 @@
             // 
             this.rdoDeltaTenths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoDeltaTenths.AutoSize = true;
-            this.rdoDeltaTenths.Location = new System.Drawing.Point(149, 3);
+            this.rdoDeltaTenths.Location = new System.Drawing.Point(112, 3);
             this.rdoDeltaTenths.Name = "rdoDeltaTenths";
-            this.rdoDeltaTenths.Size = new System.Drawing.Size(140, 17);
+            this.rdoDeltaTenths.Size = new System.Drawing.Size(103, 17);
             this.rdoDeltaTenths.TabIndex = 1;
             this.rdoDeltaTenths.TabStop = true;
             this.rdoDeltaTenths.Text = "Tenths";
@@ -185,13 +189,14 @@
             // 
             this.rdoDeltaHundredths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoDeltaHundredths.AutoSize = true;
-            this.rdoDeltaHundredths.Location = new System.Drawing.Point(295, 3);
+            this.rdoDeltaHundredths.Location = new System.Drawing.Point(221, 3);
             this.rdoDeltaHundredths.Name = "rdoDeltaHundredths";
-            this.rdoDeltaHundredths.Size = new System.Drawing.Size(140, 17);
+            this.rdoDeltaHundredths.Size = new System.Drawing.Size(103, 17);
             this.rdoDeltaHundredths.TabIndex = 2;
             this.rdoDeltaHundredths.TabStop = true;
             this.rdoDeltaHundredths.Text = "Hundredths";
             this.rdoDeltaHundredths.UseVisualStyleBackColor = true;
+            this.rdoDeltaHundredths.CheckedChanged += new System.EventHandler(this.rdoDeltaHundredths_CheckedChanged);
             // 
             // chkDropDecimals
             // 
@@ -355,19 +360,6 @@
             this.chkTwoRows.Text = "Display 2 Rows";
             this.chkTwoRows.UseVisualStyleBackColor = true;
             // 
-            // chkPossibleTimeSave
-            // 
-            this.chkPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkPossibleTimeSave.AutoSize = true;
-            this.chkPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
-            this.chkPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
-            this.chkPossibleTimeSave.Name = "chkPossibleTimeSave";
-            this.chkPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
-            this.chkPossibleTimeSave.TabIndex = 42;
-            this.chkPossibleTimeSave.Text = "Show Possible Time Save";
-            this.chkPossibleTimeSave.UseVisualStyleBackColor = true;
-            this.chkPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
-            // 
             // groupBox2
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupBox2, 4);
@@ -410,10 +402,12 @@
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel4.Controls.Add(this.rdoMilliseconds, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveSeconds, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveTenths, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.rdoTimeSaveHundredths, 2, 0);
@@ -431,7 +425,7 @@
             this.rdoTimeSaveSeconds.AutoSize = true;
             this.rdoTimeSaveSeconds.Location = new System.Drawing.Point(3, 3);
             this.rdoTimeSaveSeconds.Name = "rdoTimeSaveSeconds";
-            this.rdoTimeSaveSeconds.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveSeconds.Size = new System.Drawing.Size(103, 17);
             this.rdoTimeSaveSeconds.TabIndex = 0;
             this.rdoTimeSaveSeconds.TabStop = true;
             this.rdoTimeSaveSeconds.Text = "Seconds";
@@ -442,26 +436,64 @@
             // 
             this.rdoTimeSaveTenths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoTimeSaveTenths.AutoSize = true;
-            this.rdoTimeSaveTenths.Location = new System.Drawing.Point(149, 3);
+            this.rdoTimeSaveTenths.Location = new System.Drawing.Point(112, 3);
             this.rdoTimeSaveTenths.Name = "rdoTimeSaveTenths";
-            this.rdoTimeSaveTenths.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveTenths.Size = new System.Drawing.Size(103, 17);
             this.rdoTimeSaveTenths.TabIndex = 1;
             this.rdoTimeSaveTenths.TabStop = true;
             this.rdoTimeSaveTenths.Text = "Tenths";
             this.rdoTimeSaveTenths.UseVisualStyleBackColor = true;
+            this.rdoTimeSaveTenths.CheckedChanged += new System.EventHandler(this.rdoTimeSaveTenths_CheckedChanged);
             // 
             // rdoTimeSaveHundredths
             // 
             this.rdoTimeSaveHundredths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.rdoTimeSaveHundredths.AutoSize = true;
-            this.rdoTimeSaveHundredths.Location = new System.Drawing.Point(295, 3);
+            this.rdoTimeSaveHundredths.Location = new System.Drawing.Point(221, 3);
             this.rdoTimeSaveHundredths.Name = "rdoTimeSaveHundredths";
-            this.rdoTimeSaveHundredths.Size = new System.Drawing.Size(140, 17);
+            this.rdoTimeSaveHundredths.Size = new System.Drawing.Size(103, 17);
             this.rdoTimeSaveHundredths.TabIndex = 2;
             this.rdoTimeSaveHundredths.TabStop = true;
             this.rdoTimeSaveHundredths.Text = "Hundredths";
             this.rdoTimeSaveHundredths.UseVisualStyleBackColor = true;
             this.rdoTimeSaveHundredths.CheckedChanged += new System.EventHandler(this.rdoTimeSaveHundredths_CheckedChanged);
+            // 
+            // chkPossibleTimeSave
+            // 
+            this.chkPossibleTimeSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkPossibleTimeSave.AutoSize = true;
+            this.chkPossibleTimeSave.Location = new System.Drawing.Point(7, 6);
+            this.chkPossibleTimeSave.Margin = new System.Windows.Forms.Padding(7, 3, 3, 3);
+            this.chkPossibleTimeSave.Name = "chkPossibleTimeSave";
+            this.chkPossibleTimeSave.Size = new System.Drawing.Size(215, 17);
+            this.chkPossibleTimeSave.TabIndex = 42;
+            this.chkPossibleTimeSave.Text = "Show Possible Time Save";
+            this.chkPossibleTimeSave.UseVisualStyleBackColor = true;
+            this.chkPossibleTimeSave.CheckedChanged += new System.EventHandler(this.chkPossibleTimeSave_CheckedChanged);
+            // 
+            // rdoDeltaMilliseconds
+            // 
+            this.rdoDeltaMilliseconds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoDeltaMilliseconds.AutoSize = true;
+            this.rdoDeltaMilliseconds.Location = new System.Drawing.Point(330, 3);
+            this.rdoDeltaMilliseconds.Name = "rdoDeltaMilliseconds";
+            this.rdoDeltaMilliseconds.Size = new System.Drawing.Size(105, 17);
+            this.rdoDeltaMilliseconds.TabIndex = 3;
+            this.rdoDeltaMilliseconds.TabStop = true;
+            this.rdoDeltaMilliseconds.Text = "Milliseconds";
+            this.rdoDeltaMilliseconds.UseVisualStyleBackColor = true;
+            // 
+            // rdoMilliseconds
+            // 
+            this.rdoMilliseconds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.rdoMilliseconds.AutoSize = true;
+            this.rdoMilliseconds.Location = new System.Drawing.Point(330, 3);
+            this.rdoMilliseconds.Name = "rdoMilliseconds";
+            this.rdoMilliseconds.Size = new System.Drawing.Size(105, 17);
+            this.rdoMilliseconds.TabIndex = 3;
+            this.rdoMilliseconds.TabStop = true;
+            this.rdoMilliseconds.Text = "Milliseconds";
+            this.rdoMilliseconds.UseVisualStyleBackColor = true;
             // 
             // PreviousSegmentSettings
             // 
@@ -524,5 +556,7 @@
         private System.Windows.Forms.RadioButton rdoTimeSaveSeconds;
         private System.Windows.Forms.RadioButton rdoTimeSaveTenths;
         private System.Windows.Forms.RadioButton rdoTimeSaveHundredths;
+        private System.Windows.Forms.RadioButton rdoDeltaMilliseconds;
+        private System.Windows.Forms.RadioButton rdoMilliseconds;
     }
 }

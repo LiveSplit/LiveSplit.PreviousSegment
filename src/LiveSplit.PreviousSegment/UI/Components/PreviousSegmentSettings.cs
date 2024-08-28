@@ -69,6 +69,11 @@ namespace LiveSplit.UI.Components
             Comparison = cmbComparison.SelectedItem.ToString();
         }
 
+        void rdoDeltaHundredths_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDeltaAccuracy();
+        }
+
         void rdoDeltaTenths_CheckedChanged(object sender, EventArgs e)
         {
             UpdateDeltaAccuracy();
@@ -114,8 +119,10 @@ namespace LiveSplit.UI.Components
                 DeltaAccuracy = TimeAccuracy.Seconds;
             else if (rdoDeltaTenths.Checked)
                 DeltaAccuracy = TimeAccuracy.Tenths;
-            else
+            else if (rdoDeltaHundredths.Checked)
                 DeltaAccuracy = TimeAccuracy.Hundredths;
+            else
+                DeltaAccuracy = TimeAccuracy.Milliseconds;
         }
 
         void UpdateTimeSaveAccuracy()
@@ -124,8 +131,10 @@ namespace LiveSplit.UI.Components
                 TimeSaveAccuracy = TimeAccuracy.Seconds;
             else if (rdoTimeSaveTenths.Checked)
                 TimeSaveAccuracy = TimeAccuracy.Tenths;
-            else
+            else if (rdoTimeSaveHundredths.Checked)
                 TimeSaveAccuracy = TimeAccuracy.Hundredths;
+            else
+                TimeSaveAccuracy = TimeAccuracy.Milliseconds;
         }
 
         void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
@@ -186,6 +195,11 @@ namespace LiveSplit.UI.Components
         }
 
         private void rdoTimeSaveSeconds_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateTimeSaveAccuracy();
+        }
+
+        private void rdoTimeSaveTenths_CheckedChanged(object sender, EventArgs e)
         {
             UpdateTimeSaveAccuracy();
         }
