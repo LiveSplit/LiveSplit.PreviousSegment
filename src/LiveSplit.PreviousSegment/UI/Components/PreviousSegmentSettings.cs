@@ -60,32 +60,32 @@ public partial class PreviousSegmentSettings : UserControl
         chkPossibleTimeSave.DataBindings.Add("Checked", this, "ShowPossibleTimeSave", false, DataSourceUpdateMode.OnPropertyChanged);
     }
 
-    void chkOverride_CheckedChanged(object sender, EventArgs e)
+    private void chkOverride_CheckedChanged(object sender, EventArgs e)
     {
         label1.Enabled = btnTextColor.Enabled = chkOverride.Checked;
     }
 
-    void cmbComparison_SelectedIndexChanged(object sender, EventArgs e)
+    private void cmbComparison_SelectedIndexChanged(object sender, EventArgs e)
     {
         Comparison = cmbComparison.SelectedItem.ToString();
     }
 
-    void rdoDeltaHundredths_CheckedChanged(object sender, EventArgs e)
+    private void rdoDeltaHundredths_CheckedChanged(object sender, EventArgs e)
     {
         UpdateDeltaAccuracy();
     }
 
-    void rdoDeltaTenths_CheckedChanged(object sender, EventArgs e)
+    private void rdoDeltaTenths_CheckedChanged(object sender, EventArgs e)
     {
         UpdateDeltaAccuracy();
     }
 
-    void rdoDeltaSeconds_CheckedChanged(object sender, EventArgs e)
+    private void rdoDeltaSeconds_CheckedChanged(object sender, EventArgs e)
     {
         UpdateDeltaAccuracy();
     }
 
-    void PreviousSegmentSettings_Load(object sender, EventArgs e)
+    private void PreviousSegmentSettings_Load(object sender, EventArgs e)
     {
         chkOverride_CheckedChanged(null, null);
         chkPossibleTimeSave_CheckedChanged(null, null);
@@ -114,7 +114,7 @@ public partial class PreviousSegmentSettings : UserControl
         }
     }
 
-    void UpdateDeltaAccuracy()
+    private void UpdateDeltaAccuracy()
     {
         if (rdoDeltaSeconds.Checked)
             DeltaAccuracy = TimeAccuracy.Seconds;
@@ -126,7 +126,7 @@ public partial class PreviousSegmentSettings : UserControl
             DeltaAccuracy = TimeAccuracy.Milliseconds;
     }
 
-    void UpdateTimeSaveAccuracy()
+    private void UpdateTimeSaveAccuracy()
     {
         if (rdoTimeSaveSeconds.Checked)
             TimeSaveAccuracy = TimeAccuracy.Seconds;
@@ -138,7 +138,7 @@ public partial class PreviousSegmentSettings : UserControl
             TimeSaveAccuracy = TimeAccuracy.Milliseconds;
     }
 
-    void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
+    private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
     {
         btnColor1.Visible = cmbGradientType.SelectedItem.ToString() != "Plain";
         btnColor2.DataBindings.Clear();

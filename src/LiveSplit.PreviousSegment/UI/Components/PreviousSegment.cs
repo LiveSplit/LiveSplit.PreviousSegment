@@ -40,7 +40,7 @@ public class PreviousSegment : IComponent
         state.ComparisonRenamed += state_ComparisonRenamed;
     }
 
-    void state_ComparisonRenamed(object sender, EventArgs e)
+    private void state_ComparisonRenamed(object sender, EventArgs e)
     {
         var args = (RenameEventArgs)e;
         if (Settings.Comparison == args.OldName)
