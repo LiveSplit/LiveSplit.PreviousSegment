@@ -62,8 +62,8 @@ public class PreviousSegment : IComponent
     private void DrawBackground(Graphics g, LiveSplitState state, float width, float height)
     {
         if (Settings.BackgroundColor.A > 0
-            || Settings.BackgroundGradient != GradientType.Plain
-            && Settings.BackgroundColor2.A > 0)
+            || (Settings.BackgroundGradient != GradientType.Plain
+            && Settings.BackgroundColor2.A > 0))
         {
             var gradientBrush = new LinearGradientBrush(
                         new PointF(0, 0),
@@ -144,7 +144,9 @@ public class PreviousSegment : IComponent
         var time = state.Run[splitIndex].Comparisons[comparison][state.CurrentTimingMethod] - prevTime - bestSegments;
 
         if (time < TimeSpan.Zero)
+        {
             time = TimeSpan.Zero;
+        }
 
         return time;
     }
@@ -153,7 +155,10 @@ public class PreviousSegment : IComponent
     {
         var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
         if (!state.Run.Comparisons.Contains(comparison))
+        {
             comparison = state.CurrentComparison;
+        }
+
         var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
         var componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
 
@@ -180,18 +185,26 @@ public class PreviousSegment : IComponent
                 timeChange = LiveSplitStateHelper.GetPreviousSegmentDelta(state, state.CurrentSplitIndex - 1, comparison, state.CurrentTimingMethod);
                 timeSave = GetPossibleTimeSave(state, state.CurrentSplitIndex - 1, comparison);
             }
+
             if (timeChange != null)
             {
                 if (liveSegment != null)
+                {
                     InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
+                }
                 else
+                {
                     InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
+                }
             }
             else
             {
                 var color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
                 if (color == null)
+                {
                     color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
+                }
+
                 InternalComponent.ValueLabel.ForeColor = color.Value;
             }
         }
@@ -214,6 +227,7 @@ public class PreviousSegment : IComponent
                 InternalComponent.AlternateNameText.Add("Prev. Segment");
                 InternalComponent.AlternateNameText.Add("Prev. Seg.");
             }
+
             previousNameText = InternalComponent.InformationName;
         }
 

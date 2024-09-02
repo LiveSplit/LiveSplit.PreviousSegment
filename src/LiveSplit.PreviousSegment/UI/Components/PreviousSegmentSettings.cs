@@ -93,7 +93,10 @@ public partial class PreviousSegmentSettings : UserControl
         cmbComparison.Items.Add("Current Comparison");
         cmbComparison.Items.AddRange(CurrentState.Run.Comparisons.Where(x => x != BestSplitTimesComparisonGenerator.ComparisonName && x != NoneComparisonGenerator.ComparisonName).ToArray());
         if (!cmbComparison.Items.Contains(Comparison))
+        {
             cmbComparison.Items.Add(Comparison);
+        }
+
         rdoDeltaHundredths.Checked = DeltaAccuracy == TimeAccuracy.Hundredths;
         rdoDeltaTenths.Checked = DeltaAccuracy == TimeAccuracy.Tenths;
         rdoDeltaSeconds.Checked = DeltaAccuracy == TimeAccuracy.Seconds;
@@ -117,25 +120,41 @@ public partial class PreviousSegmentSettings : UserControl
     private void UpdateDeltaAccuracy()
     {
         if (rdoDeltaSeconds.Checked)
+        {
             DeltaAccuracy = TimeAccuracy.Seconds;
+        }
         else if (rdoDeltaTenths.Checked)
+        {
             DeltaAccuracy = TimeAccuracy.Tenths;
+        }
         else if (rdoDeltaHundredths.Checked)
+        {
             DeltaAccuracy = TimeAccuracy.Hundredths;
+        }
         else
+        {
             DeltaAccuracy = TimeAccuracy.Milliseconds;
+        }
     }
 
     private void UpdateTimeSaveAccuracy()
     {
         if (rdoTimeSaveSeconds.Checked)
+        {
             TimeSaveAccuracy = TimeAccuracy.Seconds;
+        }
         else if (rdoTimeSaveTenths.Checked)
+        {
             TimeSaveAccuracy = TimeAccuracy.Tenths;
+        }
         else if (rdoTimeSaveHundredths.Checked)
+        {
             TimeSaveAccuracy = TimeAccuracy.Hundredths;
+        }
         else
+        {
             TimeSaveAccuracy = TimeAccuracy.Milliseconds;
+        }
     }
 
     private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
