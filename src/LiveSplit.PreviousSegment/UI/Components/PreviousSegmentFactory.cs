@@ -1,27 +1,27 @@
-﻿using LiveSplit.Model;
+﻿using System;
+
+using LiveSplit.Model;
 using LiveSplit.UI.Components;
-using System;
 
 [assembly: ComponentFactory(typeof(PreviousSegmentFactory))]
 
-namespace LiveSplit.UI.Components
+namespace LiveSplit.UI.Components;
+
+public class PreviousSegmentFactory : IComponentFactory
 {
-    public class PreviousSegmentFactory : IComponentFactory
-    {
-        public string ComponentName => "Previous Segment";
+    public string ComponentName => "Previous Segment";
 
-        public string Description => "Displays how much time was saved or lost on the previous segment in relation to a comparison.";
+    public string Description => "Displays how much time was saved or lost on the previous segment in relation to a comparison.";
 
-        public ComponentCategory Category => ComponentCategory.Information;
+    public ComponentCategory Category => ComponentCategory.Information;
 
-        public IComponent Create(LiveSplitState state) => new PreviousSegment(state);
+    public IComponent Create(LiveSplitState state) => new PreviousSegment(state);
 
-        public string UpdateName => ComponentName;
+    public string UpdateName => ComponentName;
 
-        public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.PreviousSegment.xml";
+    public string XMLURL => "http://livesplit.org/update/Components/update.LiveSplit.PreviousSegment.xml";
 
-        public string UpdateURL => "http://livesplit.org/update/";
+    public string UpdateURL => "http://livesplit.org/update/";
 
-        public Version Version => Version.Parse("1.8.29");
-    }
+    public Version Version => Version.Parse("1.8.29");
 }
