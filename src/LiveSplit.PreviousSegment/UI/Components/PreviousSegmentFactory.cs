@@ -15,7 +15,10 @@ public class PreviousSegmentFactory : IComponentFactory
 
     public ComponentCategory Category => ComponentCategory.Information;
 
-    public IComponent Create(LiveSplitState state) => new PreviousSegment(state);
+    public IComponent Create(LiveSplitState state)
+    {
+        return new PreviousSegment(state);
+    }
 
     public string UpdateName => ComponentName;
 

@@ -19,8 +19,8 @@ public partial class PreviousSegmentSettings : UserControl
     public GradientType BackgroundGradient { get; set; }
     public string GradientString
     {
-        get { return BackgroundGradient.ToString(); }
-        set { BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value); }
+        get => BackgroundGradient.ToString();
+        set => BackgroundGradient = (GradientType)Enum.Parse(typeof(GradientType), value);
     }
 
     public TimeAccuracy DeltaAccuracy { get; set; }
