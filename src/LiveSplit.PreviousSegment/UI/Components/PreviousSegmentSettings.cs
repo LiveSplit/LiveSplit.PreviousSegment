@@ -178,7 +178,7 @@ public partial class PreviousSegmentSettings : UserControl
         Comparison = SettingsHelper.ParseString(element["Comparison"]);
         Display2Rows = SettingsHelper.ParseBool(element["Display2Rows"], false);
         ShowPossibleTimeSave = SettingsHelper.ParseBool(element["ShowPossibleTimeSave"], false);
-        TimeSaveAccuracy = SettingsHelper.ParseEnum<TimeAccuracy>(element["TimeSaveAccuracy"], TimeAccuracy.Tenths);
+        TimeSaveAccuracy = SettingsHelper.ParseEnum(element["TimeSaveAccuracy"], TimeAccuracy.Tenths);
     }
 
     public XmlNode GetSettings(XmlDocument document)
