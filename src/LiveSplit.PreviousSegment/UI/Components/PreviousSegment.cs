@@ -123,12 +123,12 @@ public class PreviousSegment : IComponent
 
     public TimeSpan? GetPossibleTimeSave(LiveSplitState state, int splitIndex, string comparison)
     {
-        var prevTime = TimeSpan.Zero;
+        TimeSpan prevTime = TimeSpan.Zero;
         TimeSpan? bestSegments = state.Run[splitIndex].BestSegmentTime[state.CurrentTimingMethod];
 
         while (splitIndex > 0 && bestSegments != null)
         {
-            var splitTime = state.Run[splitIndex - 1].Comparisons[comparison][state.CurrentTimingMethod];
+            TimeSpan? splitTime = state.Run[splitIndex - 1].Comparisons[comparison][state.CurrentTimingMethod];
             if (splitTime != null)
             {
                 prevTime = splitTime.Value;
@@ -141,7 +141,7 @@ public class PreviousSegment : IComponent
             }
         }
 
-        var time = state.Run[splitIndex].Comparisons[comparison][state.CurrentTimingMethod] - prevTime - bestSegments;
+        TimeSpan? time = state.Run[splitIndex].Comparisons[comparison][state.CurrentTimingMethod] - prevTime - bestSegments;
 
         if (time < TimeSpan.Zero)
         {
@@ -153,14 +153,14 @@ public class PreviousSegment : IComponent
 
     public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
     {
-        var comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
+        string comparison = Settings.Comparison == "Current Comparison" ? state.CurrentComparison : Settings.Comparison;
         if (!state.Run.Comparisons.Contains(comparison))
         {
             comparison = state.CurrentComparison;
         }
 
-        var comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
-        var componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
+        string comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
+        string componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
 
         InternalComponent.LongestString = componentName;
         InternalComponent.InformationName = componentName;
@@ -171,7 +171,7 @@ public class PreviousSegment : IComponent
 
         TimeSpan? timeChange = null;
         TimeSpan? timeSave = null;
-        var liveSegment = LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod);
+        TimeSpan? liveSegment = LiveSplitStateHelper.CheckLiveDelta(state, false, comparison, state.CurrentTimingMethod);
         if (state.CurrentPhase != TimerPhase.NotRunning)
         {
             if (liveSegment != null)
@@ -199,7 +199,7 @@ public class PreviousSegment : IComponent
             }
             else
             {
-                var color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
+                Color? color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
                 if (color == null)
                 {
                     color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
