@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
+using LiveSplit.Localization;
 using LiveSplit.Model;
 using LiveSplit.Model.Comparisons;
 using LiveSplit.TimeFormatters;
@@ -13,6 +14,8 @@ namespace LiveSplit.UI.Components;
 
 public class PreviousSegment : IComponent
 {
+    private static string T(string source) => UiLocalizer.Translate(source, LanguageResolver.ResolveCurrentCultureLanguage());
+
     protected InfoTimeComponent InternalComponent { get; set; }
     public PreviousSegmentSettings Settings { get; set; }
 
@@ -101,7 +104,7 @@ public class PreviousSegment : IComponent
     public float MinimumHeight => InternalComponent.MinimumHeight;
 
     public string ComponentName
-        => "Previous Segment" + (Settings.Comparison == "Current Comparison"
+        => T("Previous Segment") + (Settings.Comparison == "Current Comparison"
             ? ""
             : " (" + CompositeComparisons.GetShortComparisonName(Settings.Comparison) + ")");
 
@@ -160,7 +163,7 @@ public class PreviousSegment : IComponent
         }
 
         string comparisonName = CompositeComparisons.GetShortComparisonName(comparison);
-        string componentName = "Previous Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
+        string componentName = T("Previous Segment") + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
 
         InternalComponent.LongestString = componentName;
         InternalComponent.InformationName = componentName;
@@ -178,7 +181,7 @@ public class PreviousSegment : IComponent
             {
                 timeChange = liveSegment;
                 timeSave = GetPossibleTimeSave(state, state.CurrentSplitIndex, comparison);
-                InternalComponent.InformationName = "Live Segment" + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
+                InternalComponent.InformationName = T("Live Segment") + (Settings.Comparison == "Current Comparison" ? "" : " (" + comparisonName + ")");
             }
             else if (state.CurrentSplitIndex > 0)
             {
@@ -216,17 +219,17 @@ public class PreviousSegment : IComponent
         if (InternalComponent.InformationName != previousNameText)
         {
             InternalComponent.AlternateNameText.Clear();
-            if (liveSegment != null)
-            {
-                InternalComponent.AlternateNameText.Add("Live Segment");
-                InternalComponent.AlternateNameText.Add("Live Seg.");
-            }
-            else
-            {
-                InternalComponent.AlternateNameText.Add("Previous Segment");
-                InternalComponent.AlternateNameText.Add("Prev. Segment");
-                InternalComponent.AlternateNameText.Add("Prev. Seg.");
-            }
+                if (liveSegment != null)
+                {
+                    InternalComponent.AlternateNameText.Add(T("Live Segment"));
+                    InternalComponent.AlternateNameText.Add(T("Live Seg."));
+                }
+                else
+                {
+                    InternalComponent.AlternateNameText.Add(T("Previous Segment"));
+                    InternalComponent.AlternateNameText.Add(T("Prev. Segment"));
+                    InternalComponent.AlternateNameText.Add(T("Prev. Seg."));
+                }
 
             previousNameText = InternalComponent.InformationName;
         }
