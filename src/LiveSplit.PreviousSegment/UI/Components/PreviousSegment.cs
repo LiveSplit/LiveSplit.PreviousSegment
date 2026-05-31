@@ -1,14 +1,13 @@
+﻿using LiveSplit.Localization;
+using LiveSplit.Model;
+using LiveSplit.Model.Comparisons;
+using LiveSplit.TimeFormatters;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
-
-using LiveSplit.Localization;
-using LiveSplit.Model;
-using LiveSplit.Model.Comparisons;
-using LiveSplit.TimeFormatters;
 
 namespace LiveSplit.UI.Components;
 
@@ -70,14 +69,10 @@ public class PreviousSegment : IComponent
             && Settings.BackgroundColor2.A > 0))
         {
             var gradientBrush = new LinearGradientBrush(
-                        new PointF(0, 0),
-                        Settings.BackgroundGradient == GradientType.Horizontal
-                        ? new PointF(width, 0)
-                        : new PointF(0, height),
-                        Settings.BackgroundColor,
-                        Settings.BackgroundGradient == GradientType.Plain
-                        ? Settings.BackgroundColor
-                        : Settings.BackgroundColor2);
+                new PointF(0, 0),
+                Settings.BackgroundGradient == GradientType.Horizontal ? new PointF(width, 0) : new PointF(0, height),
+                Settings.BackgroundColor,
+                Settings.BackgroundGradient == GradientType.Plain ? Settings.BackgroundColor : Settings.BackgroundColor2);
             g.FillRectangle(gradientBrush, 0, 0, width, height);
         }
     }
@@ -192,23 +187,14 @@ public class PreviousSegment : IComponent
 
             if (timeChange != null)
             {
-                if (liveSegment != null)
-                {
-                    InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value;
-                }
-                else
-                {
-                    InternalComponent.ValueLabel.ForeColor = LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
-                }
+                InternalComponent.ValueLabel.ForeColor = liveSegment != null
+                    ? LiveSplitStateHelper.GetSplitColor(state, timeChange, state.CurrentSplitIndex, false, false, comparison, state.CurrentTimingMethod).Value
+                    : LiveSplitStateHelper.GetSplitColor(state, timeChange.Value, state.CurrentSplitIndex - 1, false, true, comparison, state.CurrentTimingMethod).Value;
             }
             else
             {
-                Color? color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod);
-                if (color == null)
-                {
-                    color = Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor;
-                }
-
+                Color? color = LiveSplitStateHelper.GetSplitColor(state, null, state.CurrentSplitIndex - 1, true, true, comparison, state.CurrentTimingMethod)
+                    ?? (Settings.OverrideTextColor ? Settings.TextColor : state.LayoutSettings.TextColor);
                 InternalComponent.ValueLabel.ForeColor = color.Value;
             }
         }
@@ -220,17 +206,17 @@ public class PreviousSegment : IComponent
         if (InternalComponent.InformationName != previousNameText)
         {
             InternalComponent.AlternateNameText.Clear();
-                if (liveSegment != null)
-                {
-                    InternalComponent.AlternateNameText.Add(T("Live Segment"));
-                    InternalComponent.AlternateNameText.Add(T("Live Seg."));
-                }
-                else
-                {
-                    InternalComponent.AlternateNameText.Add(T("Previous Segment"));
-                    InternalComponent.AlternateNameText.Add(T("Prev. Segment"));
-                    InternalComponent.AlternateNameText.Add(T("Prev. Seg."));
-                }
+            if (liveSegment != null)
+            {
+                InternalComponent.AlternateNameText.Add(T("Live Segment"));
+                InternalComponent.AlternateNameText.Add(T("Live Seg."));
+            }
+            else
+            {
+                InternalComponent.AlternateNameText.Add(T("Previous Segment"));
+                InternalComponent.AlternateNameText.Add(T("Prev. Segment"));
+                InternalComponent.AlternateNameText.Add(T("Prev. Seg."));
+            }
 
             previousNameText = InternalComponent.InformationName;
         }

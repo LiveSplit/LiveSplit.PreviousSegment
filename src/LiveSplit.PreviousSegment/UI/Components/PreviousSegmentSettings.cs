@@ -1,12 +1,11 @@
-﻿using System;
+﻿using LiveSplit.Model;
+using LiveSplit.Model.Comparisons;
+using LiveSplit.TimeFormatters;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
-
-using LiveSplit.Model;
-using LiveSplit.Model.Comparisons;
-using LiveSplit.TimeFormatters;
 
 namespace LiveSplit.UI.Components;
 
@@ -119,42 +118,20 @@ public partial class PreviousSegmentSettings : UserControl
 
     private void UpdateDeltaAccuracy()
     {
-        if (rdoDeltaSeconds.Checked)
-        {
-            DeltaAccuracy = TimeAccuracy.Seconds;
-        }
-        else if (rdoDeltaTenths.Checked)
-        {
-            DeltaAccuracy = TimeAccuracy.Tenths;
-        }
-        else if (rdoDeltaHundredths.Checked)
-        {
-            DeltaAccuracy = TimeAccuracy.Hundredths;
-        }
-        else
-        {
-            DeltaAccuracy = TimeAccuracy.Milliseconds;
-        }
+        DeltaAccuracy =
+            rdoDeltaSeconds.Checked ? TimeAccuracy.Seconds
+            : rdoDeltaTenths.Checked ? TimeAccuracy.Tenths
+            : rdoDeltaHundredths.Checked ? TimeAccuracy.Hundredths
+            : TimeAccuracy.Milliseconds;
     }
 
     private void UpdateTimeSaveAccuracy()
     {
-        if (rdoTimeSaveSeconds.Checked)
-        {
-            TimeSaveAccuracy = TimeAccuracy.Seconds;
-        }
-        else if (rdoTimeSaveTenths.Checked)
-        {
-            TimeSaveAccuracy = TimeAccuracy.Tenths;
-        }
-        else if (rdoTimeSaveHundredths.Checked)
-        {
-            TimeSaveAccuracy = TimeAccuracy.Hundredths;
-        }
-        else
-        {
-            TimeSaveAccuracy = TimeAccuracy.Milliseconds;
-        }
+        TimeSaveAccuracy =
+            rdoTimeSaveSeconds.Checked ? TimeAccuracy.Seconds
+            : rdoTimeSaveTenths.Checked ? TimeAccuracy.Tenths
+            : rdoTimeSaveHundredths.Checked ? TimeAccuracy.Hundredths
+            : TimeAccuracy.Milliseconds;
     }
 
     private void cmbGradientType_SelectedIndexChanged(object sender, EventArgs e)
